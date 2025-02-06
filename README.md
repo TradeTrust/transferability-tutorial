@@ -1,4 +1,4 @@
-# Verifier Tutorial
+# Transferability Tutorial
 
 This tutorial walks you through setting up a simple React project using TypeScript and Vite. You'll integrate the **TrustVC** library to see how transactions and endorsement chain works of a W3C **Verifiable Credential (VC)** or **OpenAttestation** document.
 
