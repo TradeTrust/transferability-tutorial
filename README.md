@@ -1,6 +1,6 @@
 # Verifier Tutorial
 
-This tutorial walks you through setting up a simple React project using TypeScript and Vite. You'll integrate the **TrustVC** library to verify a W3C **Verifiable Credential (VC)** or **OpenAttestation** document. The focus of this tutorial is on **non-transferable credentials**.
+This tutorial walks you through setting up a simple React project using TypeScript and Vite. You'll integrate the **TrustVC** library to see how transactions and endorsement chain works of a W3C **Verifiable Credential (VC)** or **OpenAttestation** document.
 
 ## Prerequisites
 
@@ -18,8 +18,8 @@ Follow these steps to set up the project locally:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/TradeTrust/verifier-tutorial.git
-   cd verifier-tutorial
+   git clone https://github.com/TradeTrust/transferability-tutorial.git
+   cd transferability-tutorial
    ```
 
 2. **Install dependencies:**
@@ -40,4 +40,4 @@ Follow these steps to set up the project locally:
 
 ## Transferring a document
 
-You will have to sign the document to generate the Token ID and mint the token as well to run the tutorial.
+You will have to sign the document to generate the Token ID and mint the token as well to see the endorsement chain.
