@@ -30,7 +30,10 @@ Follow these steps to set up the project locally:
    npm install
    ```
 
-3. **Run the development server:**
+3. **Update environment**
+   Add and update the .env file with infura api key
+   You can update the chain you want to test by updating the RPC url in app.js.
+4. **Run the development server:**
 
    To start the project locally, run:
 

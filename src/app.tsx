@@ -10,6 +10,9 @@ import AssetManagement from "./assetManagement";
 import TitleEscrowAbi from "./abi/TitleEscrow.json";
 
 const App: React.FC = () => {
+  const rpc = `https://polygon-amoy.infura.io/v3/${
+    import.meta.env.VITE_INFURA_ID
+  }`;
   const [hasAttemptedUpload, setHasAttemptedUpload] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -65,10 +68,6 @@ const App: React.FC = () => {
     try {
       const fileContent = await file.text();
       const vc = JSON.parse(fileContent);
-      const rpc =
-        "https://polygon-amoy.infura.io/v3/f724c79c65a74253a6bdb6c0d6a1cc27";
-      //   const rpc =
-      //     "https://sepolia.infura.io/v3/f724c79c65a74253a6bdb6c0d6a1cc27";
       const _provider = new ethers.providers.JsonRpcProvider(rpc);
       if (!_provider) return;
       const titleEscrowAddress = await getTitleEscrowAddress(
