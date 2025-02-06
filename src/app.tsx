@@ -134,6 +134,12 @@ const App: React.FC = () => {
         return;
       }
       params = [newBeneficiary, encryptedRemark];
+    } else if (action === "nominate") {
+      if (!ethers.utils.isAddress(newBeneficiary)) {
+        console.error("Invalid Ethereum address:", newBeneficiary);
+        return;
+      }
+      params = [newBeneficiary, encryptedRemark];
     } else if (action === "transferOwners") {
       if (
         !ethers.utils.isAddress(newBeneficiary) ||
