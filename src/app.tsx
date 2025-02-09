@@ -1,18 +1,17 @@
-import React, { useState } from "react";
 import {
-  getTitleEscrowAddress,
-  fetchEndorsementChain,
   encrypt,
+  fetchEndorsementChain,
+  getTitleEscrowAddress,
+  v5Contracts
 } from "@trustvc/trustvc";
 import { ethers, Signer } from "ethers";
-import EndorsementChain from "./endorsementChain";
+import React, { useState } from "react";
 import AssetManagement from "./assetManagement";
-import TitleEscrowAbi from "./abi/TitleEscrow.json";
+import EndorsementChain from "./endorsementChain";
+
 
 const App: React.FC = () => {
-  const rpc = `https://polygon-amoy.infura.io/v3/${
-    import.meta.env.VITE_INFURA_ID
-  }`;
+  const rpc = `https://polygon-amoy.infura.io/v3/${import.meta.env.VITE_INFURA_ID}`;
   const [hasAttemptedUpload, setHasAttemptedUpload] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -35,12 +34,14 @@ const App: React.FC = () => {
     if (ethereum) {
       try {
         const injectedWeb3 = ethereum || (web3 && web3.currentProvider);
-        const newProvider = new ethers.providers.Web3Provider(
-          injectedWeb3,
-          "any"
-        );
+        let newProvider;
+        if (ethers.version.startsWith('6.')) {
+          newProvider = new (ethers as any).BrowserProvider(injectedWeb3, "any");
+        } else {
+          newProvider = new (ethers as any).providers.Web3Provider(injectedWeb3, "any");
+        }
         await ethereum.request({ method: "eth_requestAccounts" });
-        const _signer = newProvider.getSigner();
+        const _signer = await newProvider.getSigner();
         setSigner(_signer);
         const address = await _signer.getAddress();
         setAccount(address);
@@ -68,7 +69,8 @@ const App: React.FC = () => {
     try {
       const fileContent = await file.text();
       const vc = JSON.parse(fileContent);
-      const _provider = new ethers.providers.JsonRpcProvider(rpc);
+      const JsonRpcProvider = ethers.version.startsWith('6.') ? (ethers as any).JsonRpcProvider : (ethers as any).providers.JsonRpcProvider
+      const _provider = new JsonRpcProvider(rpc);
       if (!_provider) return;
       const titleEscrowAddress = await getTitleEscrowAddress(
         vc.credentialStatus.tokenRegistry,
@@ -77,9 +79,10 @@ const App: React.FC = () => {
       );
       const contract = new ethers.Contract(
         titleEscrowAddress,
-        TitleEscrowAbi,
+        v5Contracts.TitleEscrow__factory.abi,
         _provider
       );
+
       setHolder(await contract.holder());
       setBeneficiary(await contract.beneficiary());
       setPrevHolder(await contract.prevHolder());
@@ -113,36 +116,37 @@ const App: React.FC = () => {
     // Connect to the contract
     const contract = new ethers.Contract(
       titleEscrowAddress,
-      TitleEscrowAbi,
+      v5Contracts.TitleEscrow__factory.abi,
       signer
     );
 
     const encryptedRemark = "0x" + encrypt(remarks, encryptionId);
     console.log("encrypted remark", encryptedRemark);
 
+    const isAddress = ethers.version.startsWith('6.') ? (ethers as any).isAddress : (ethers as any).utils.isAddress;
     let params: string[] = [];
     if (action === "transferHolder") {
-      if (!ethers.utils.isAddress(newHolder)) {
+      if (!isAddress(newHolder)) {
         console.error("Invalid Ethereum address:", newHolder);
         return;
       }
       params = [newHolder, encryptedRemark];
     } else if (action === "transferBeneficiary") {
-      if (!ethers.utils.isAddress(newBeneficiary)) {
+      if (!isAddress(newBeneficiary)) {
         console.error("Invalid Ethereum address:", newBeneficiary);
         return;
       }
       params = [newBeneficiary, encryptedRemark];
     } else if (action === "nominate") {
-      if (!ethers.utils.isAddress(newBeneficiary)) {
+      if (!isAddress(newBeneficiary)) {
         console.error("Invalid Ethereum address:", newBeneficiary);
         return;
       }
       params = [newBeneficiary, encryptedRemark];
     } else if (action === "transferOwners") {
       if (
-        !ethers.utils.isAddress(newBeneficiary) ||
-        !ethers.utils.isAddress(newHolder)
+        !isAddress(newBeneficiary) ||
+        !isAddress(newHolder)
       ) {
         console.error("Invalid Ethereum address:", newBeneficiary, newHolder);
         return;
