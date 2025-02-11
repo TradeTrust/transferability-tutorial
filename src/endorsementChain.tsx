@@ -8,15 +8,19 @@ const EndorsementChain: React.FC<EndorsementChainProps> = ({
 }) => {
   const actionMessage = {
     INITIAL: "Document has been issued",
-    TRANSFER_HOLDER: "Transfer holdership",
-    REJECT_TRANSFER_HOLDER: "Rejection of holdership",
     NOMINATE: "Nomination of new beneficiary",
     REJECT_TRANSFER_BENEFICIARY: "Rejection of beneficiary",
+    REJECT_TRANSFER_HOLDER: "Rejection of holdership",
     REJECT_TRANSFER_OWNERS: "Rejection of owners",
-    RETURNED_TO_ISSUER: "Returned to issuer",
     RETURN_TO_ISSUER_ACCEPTED: "Return to issuer accepted",
-    TRANSFER_BENEFICIARY: "Transfer beneficiary",
     RETURN_TO_ISSUER_REJECTED: "Return to issuer rejected",
+    RETURNED_TO_ISSUER: "Returned to issuer",
+    SURRENDER_ACCEPTED: "Return to issuer accepted",
+    SURRENDER_REJECTED: "Return to issuer rejected",
+    SURRENDERED: "Returned to issuer",
+    TRANSFER_BENEFICIARY: "Transfer beneficiary",
+    TRANSFER_HOLDER: "Transfer holdership",
+    TRANSFER_OWNERS: "Trnasfer beneficiary and holdership"
   };
   const formatDate = (timestamp: number) => {
     const date = new Date(timestamp);

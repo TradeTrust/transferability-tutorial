@@ -1,0 +1,39 @@
+{
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1",
+    "https://w3c-ccg.github.io/citizenship-vocab/contexts/citizenship-v1.jsonld",
+    "https://w3id.org/security/bbs/v1",
+    "https://trustvc.io/context/transferable-records-context.json"
+  ],
+  "credentialStatus": {
+    "type": "TransferableRecords",
+    "tokenNetwork": {
+      "chain": "MATIC",
+      "chainId": 80002
+    },
+    "tokenRegistry": "0x6c2a002A5833a100f38458c50F11E71Aa1A342c6",
+    "tokenId": "23f719b016c88ba1ef2e10c0718d7d0f0026b1dc6e219629f81e2f0f811c4e3e"
+  },
+  "credentialSubject": {
+    "name": "TrustVC",
+    "birthDate": "2024-04-01T12:19:52Z",
+    "type": [
+      "PermanentResident",
+      "Person"
+    ]
+  },
+  "expirationDate": "2029-12-03T12:19:52Z",
+  "issuer": "did:web:trustvc.github.io:did:1",
+  "type": [
+    "VerifiableCredential"
+  ],
+  "issuanceDate": "2024-04-01T12:19:52Z",
+  "id": "urn:bnid:_:0194cfc4-6b6c-7553-9b67-1ed41632eb2a",
+  "proof": {
+    "type": "BbsBlsSignature2020",
+    "created": "2025-02-04T07:02:26Z",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "ouPsZgRPF5nIEYenlfQbRPVAunre6mhcOy6YswI24/FFSTJ5mHujBEBi1qmNjJEBM4Gwr2jteoyAIIz5w7vohD0tk9aBaHRSAyj6fhgrq8Ahbi4qhudCMuPu8FIY1xInSl+RZckKKYIEXP/R789sZQ==",
+    "verificationMethod": "did:web:trustvc.github.io:did:1#keys-1"
+  }
+}
