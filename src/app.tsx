@@ -96,7 +96,7 @@ const App: React.FC = () => {
         vc.credentialStatus.tokenRegistry,
         "0x" + vc.credentialStatus.tokenId,
         _provider as any,
-        vc.id
+        vc?.id
       );
       console.log("Endorsement Chain", _endorsementChain);
       setEndorsementChain(_endorsementChain as any);

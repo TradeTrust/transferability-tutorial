@@ -4,15 +4,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vite"
+    "dev": "vite --force"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@trustvc/trustvc": "^1.2.2",
-    "ethers": "^5.7.2",
+    "@trustvc/trustvc": "^1.2.5",
+    "ethers": "^6.13.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "vite-plugin-node-polyfills": "^0.23.0"
