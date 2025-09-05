@@ -11,7 +11,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@trustvc/trustvc": "^1.5.2",
+    "@trustvc/trustvc": "^2.0.6",
     "ethers": "^6.14.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
